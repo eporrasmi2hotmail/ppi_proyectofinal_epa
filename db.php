@@ -12,6 +12,6 @@ if ($conn->connect_error) {
     die("Conexión no exitosa: " . $conn->connect_error);
 }
 
-mysqli_close($conn);
+//mysqli_close($conn);
 
 ?>

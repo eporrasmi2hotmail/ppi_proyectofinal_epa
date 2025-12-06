@@ -1,46 +1,81 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Librería - Inicio</title>
-    <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
-    <div class="container" style="text-align: center;">
-        <h1>Sistema de Control de Librería</h1>
-        <p>Bienvenido!!! Seleccione una opción para comenzar:</p>
-        
-        <div class="menu-dashboard">
-            <div class="card">
-                <h2>📚 Libros</h2>
-                <p>Administración de libros.</p>
-                <div class="card-actions">
-                    <a href="consulta.php" class="btn">Ver Catálogo</a>
-                    <a href="registro.php" class="btn-outline">Nuevo Libro</a>
-                </div>
-            </div>
+<?php 
+include 'db.php'; 
+include 'header.php'; // Carga la navegación y abre el contenedor principal
 
-            <div class="card">
-                <h2>✍️ Autores</h2>
-                <p>Administración de autores.</p>
-                <div class="card-actions">
-                    <a href="autores.php" class="btn">Autores</a>
-                </div>
-            </div>
+// Consulta para obtener un libro aleatorio (ORDER BY RAND)
+$sql_random = "SELECT l.titulo, l.fecha_publicacion, l.portada, a.nombre AS autor, e.nombre AS editorial 
+               FROM libro l 
+               INNER JOIN autor a ON l.idAutor = a.id 
+               INNER JOIN editorial e ON l.idEditorial = e.id
+               ORDER BY RAND() LIMIT 1";
+$result = $conn->query($sql_random);
+$libro_random = $result->fetch_assoc();
+?>
 
-            <div class="card">
-                <h2>🏢 Editoriales</h2>
-                <p>Administración de editoriales.</p>
-                <div class="card-actions">
-                    <a href="editoriales.php" class="btn">Editoriales</a>
+<div class="row align-items-center mt-3">
+    <div class="col-lg-6 mb-4">
+        <div class="p-5 rounded-3 shadow-sm" style="background-color: #fff; border-left: 5px solid var(--cafe-principal);">
+            <h1 class="display-5 fw-bold" style="color: var(--cafe-principal);">Bienvenido a la Librería</h1>
+            <p class="lead text-secondary">
+                Este sistema permite la gestión integral del inventario bibliográfico. 
+                Puedes registrar nuevos títulos, consultar el catálogo existente y administrar la información de autores y editoriales de manera sencilla.
+            </p>
+            <hr class="my-4">
+            <p>Utiliza la barra de navegación superior para acceder a las diferentes secciones.</p>
+            <a href="consulta.php" class="btn btn-primary btn-lg px-4">Ver Catálogo</a>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card shadow border-0">
+            <div class="card-header text-white fw-bold" style="background-color: #8d6e63;">
+                ⭐ Recomendación del Momento
+            </div>
+            <div class="row g-0">
+                <div class="col-md-5 bg-light d-flex align-items-center justify-content-center">
+                    <?php if (!empty($libro_random['portada'])): ?>
+                        <img src="data:image/jpeg;base64,<?php echo base64_encode($libro_random['portada']); ?>" 
+                             class="img-fluid rounded-start" 
+                             style="max-height: 250px; width: 100%; object-fit: cover;" 
+                             alt="Portada del libro">
+                    <?php else: ?>
+                        <div class="text-muted py-5 text-center w-100">
+                            <span>Sin Portada</span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <?php if($libro_random): ?>
+                            <h5 class="card-title fw-bold text-dark"><?php echo $libro_random['titulo']; ?></h5>
+                            <p class="card-text mt-3">
+                                <span class="d-block text-muted"><small>Autor:</small></span>
+                                <span class="fs-5"><?php echo $libro_random['autor']; ?></span>
+                            </p>
+                            <p class="card-text">
+                                <span class="d-block text-muted"><small>Editorial:</small></span>
+                                <strong><?php echo $libro_random['editorial']; ?></strong>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">Publicado el: <?php echo date("d-m-Y", strtotime($libro_random['fecha_publicacion'])); ?></small>
+                            </p>
+                        <?php else: ?>
+                            <p class="text-muted text-center mt-4">No hay libros registrados en la base de datos.</p>
+                            <div class="text-center">
+                                <a href="registro.php" class="btn btn-sm btn-outline-secondary">Registrar el primero</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <footer style="margin-top: 40px; font-size: 0.8em; color: #666;">
-            &copy; 2025 Sistema de Librería - Práctica 8, Emilio Porras Alonso
-        </footer>
     </div>
+</div>
+
+</div> 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
