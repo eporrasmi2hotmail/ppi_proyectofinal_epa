@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
-        /* Personalización para mantener los tonos de librería */
+        /* Personalización para los colores de la librería */
         :root {
             --cafe-principal: #5d4037;
             --fondo-crema: #fdfbf7;
@@ -35,7 +35,7 @@
         
         /* Ajuste para que las imágenes de las portadas se vean uniformes en las cards */
         .card-img-top {
-            height: 300px;
+            height: 400px;
             object-fit: cover;
         }
     </style>
@@ -44,7 +44,8 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom shadow sticky-top">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="index.php">📚 Librería</a>
+    <a class="navbar-brand fw-bold" href="index.php">🦉 ALETHEÍA</a>
+    <a class="navbar-brand fst-italic">Librería de Pensamiento Filosófico</a>
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

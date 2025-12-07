@@ -1,13 +1,13 @@
 <?php 
 include 'db.php'; 
-include 'header.php'; // Incluye la navegación y estilos
+include 'header.php'; // Este es el que gestiona la navegación y estilos (bootstrap)
 
-// --- LÓGICA PHP: REGISTRAR AUTOR ---
+// --- LÓGICA PARA REGISTRAR AL AUTOR ---
 $mensaje = "";
 $tipo_mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nombre_autor'])) {
-    // Limpieza básica de la entrada
+    // Limpiamos los inputs de la información a solicitar
     $nombre = $conn->real_escape_string($_POST['nombre_autor']);
     
     $sql_insert = "INSERT INTO autor (nombre) VALUES ('$nombre')";
@@ -61,26 +61,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nombre_autor'])) {
                     <table class="table table-striped table-hover mb-0 align-middle">
                         <thead class="table-dark">
                             <tr>
-                                <th style="width: 15%;">ID</th>
+                                <th class="d-none d-sm-table-cell" style="width: 15%;">ID</th>
                                 <th>Nombre del Autor</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            // Consulta: Mostrar los más recientes primero
-                            $sql = "SELECT * FROM autor ORDER BY id DESC";
+                            // Consulta: Mostrar en forma ascendente por nombre
+                            $sql = "SELECT * FROM autor ORDER BY nombre ASC";
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {
                                 while($row = $result->fetch_assoc()) {
                                     echo "<tr>";
-                                    echo "<td class='text-center text-muted small'>" . $row["id"] . "</td>";
+                                    echo "<td class='d-none d-sm-table-cell text-center text-muted small'>" . $row["id"] . "</td>";
                                     echo "<td class='fw-bold'>" . $row["nombre"] . "</td>";
                                     echo "</tr>";
                                 }
                             } else {
                                 echo "<tr><td colspan='2' class='text-center py-4 text-muted'>No hay autores registrados en el sistema.</td></tr>";
                             }
+                            mysqli_close($conn);
                             ?>
                         </tbody>
                     </table>
@@ -90,6 +91,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nombre_autor'])) {
     </div>
 </div>
 
-</div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</div> 
+<footer class="bg-light border-top mt-5 py-4">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <p class="text-secondary mb-0"><em>"La verdad no se oculta, se desoculta"</em></p>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <p class="text-secondary mb-0"><strong>Sapere aude</strong></p>
+            </div>
+            <div class="col-md-4">
+                <p class="text-secondary mb-0">© 2025 Emilio Porras Alonso. Derechos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

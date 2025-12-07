@@ -1,8 +1,8 @@
 <?php 
 include 'db.php'; 
-include 'header.php'; // Incluye la navegación y estilos
+include 'header.php'; // Este es el que gestiona la navegación y estilos (bootstrap)
 
-// --- LÓGICA PHP: REGISTRAR LIBRO ---
+// --- LÓGICA PARA REGISTRAR LIBRO ---
 $mensaje = "";
 $tipo_mensaje = "";
 
@@ -121,6 +121,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
 
-</div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</div> 
+<footer class="bg-light border-top mt-5 py-4">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <p class="text-secondary mb-0"><em>"La verdad no se oculta, se desoculta"</em></p>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <p class="text-secondary mb-0"><strong>Sapere aude</strong></p>
+            </div>
+            <div class="col-md-4">
+                <p class="text-secondary mb-0">© 2025 Emilio Porras Alonso. Derechos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

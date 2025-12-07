@@ -1,6 +1,6 @@
 <?php 
 include 'db.php'; 
-include 'header.php'; // Incluye la navegación y estilos Bootstrap
+include 'header.php'; // Este es el que gestiona la navegación y estilos (bootstrap)
 
 // --- 1. LÓGICA DE ACTUALIZACIÓN (Cuando se envía el formulario) ---
 $mensaje = "";
@@ -181,11 +181,11 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     </thead>
                     <tbody>
                         <?php
-                        // Consulta con LIMIT y OFFSET
+                        // Consulta con LIMIT y OFFSET para mejor control de paginación
                         $sql = "SELECT l.id, l.titulo, l.portada, a.nombre as autor 
                                 FROM libro l 
                                 INNER JOIN autor a ON l.idAutor = a.id
-                                ORDER BY l.id DESC
+                                ORDER BY l.titulo ASC
                                 LIMIT $offset, $registros_por_pagina";
                         $result = $conn->query($sql);
 
@@ -247,6 +247,22 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     </div>
 <?php } ?>
 
-</div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</div> 
+<footer class="bg-light border-top mt-5 py-4">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <p class="text-secondary mb-0"><em>"La verdad no se oculta, se desoculta"</em></p>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <p class="text-secondary mb-0"><strong>Sapere aude</strong></p>
+            </div>
+            <div class="col-md-4">
+                <p class="text-secondary mb-0">© 2025 Emilio Porras Alonso. Derechos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
