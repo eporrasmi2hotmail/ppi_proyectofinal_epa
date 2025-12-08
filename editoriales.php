@@ -21,7 +21,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nombre_editorial'])) 
     }
 }
 ?>
-
+<style> /* Estilo para fondo fijo semitransparente */
+    body {
+        background-image: url('fondo_librería.jpg');
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.85);
+        z-index: -1;
+    }
+</style>
 <div class="row">
     <div class="col-md-4 mb-4">
         <div class="card shadow-sm">

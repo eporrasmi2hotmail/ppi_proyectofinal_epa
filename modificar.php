@@ -45,7 +45,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
+<style> /* Estilo para fondo fijo semitransparente */
+    body {
+        background-image: url('fondo_librería.jpg');
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.85);
+        z-index: -1;
+    }
+</style>
 <style>
     .page-link { color: #5d4037; }
     .page-link:hover { color: #3e2723; background-color: #efebe9; }

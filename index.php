@@ -12,6 +12,26 @@ $result = $conn->query($sql_random);
 $libro_random = $result->fetch_assoc();
 ?>
 
+<style> /* Estilo para fondo fijo semitransparente */
+    body {
+        background-image: url('fondo_librería.jpg');
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.85);
+        z-index: -1;
+    }
+</style>
+
 <div class="row align-items-center mt-3">
     <div class="col-lg-6 mb-4">
         <div class="p-5 rounded-3 shadow-sm" style="background-color: #fff; border-left: 5px solid var(--cafe-principal);">
@@ -21,10 +41,10 @@ $libro_random = $result->fetch_assoc();
                 viene del griego antiguo y significa "verdad" o "desocultamiento". Es un concepto fundamental en filosofía,
                  especialmente en Heidegger, 
                 que entendía la verdad no como mera correspondencia, sino como revelación o desvelamiento del ser. 
-                Puedes registrar nuevos títulos, consultar el catálogo existente y administrar la información de autores y editoriales de manera sencilla.
             </p>
             <hr class="my-4">
-            <p>Utiliza la barra de navegación superior para acceder a las diferentes secciones.</p>
+            <p>Puedes registrar nuevos títulos, consultar el catálogo existente y administrar la información de autores y editoriales de manera sencilla.
+               Utiliza la barra de navegación superior para acceder a las diferentes secciones.</p>
             <a href="consulta.php" class="btn btn-primary btn-lg px-4">Ver Catálogo</a>
         </div>
     </div>
